@@ -4,7 +4,9 @@ package com.example.swaggerdemoexample.service.impl;
 import com.example.swaggerdemoexample.entity.Product;
 import com.example.swaggerdemoexample.repository.ProductRepo;
 import com.example.swaggerdemoexample.service.ProductService;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +14,17 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
    @Autowired
     private ProductRepo productRepo;
-
     @Override
-    public List<Product> getAllProducts() {
+    public List<Product> findAll() {
         return productRepo.findAll();
     }
+    //@RequestParam
+    /*@Override
+    public List<Product> findAllProducts(int length){
+        List<Product> allProducts =  productRepo.findAll();
+        List<Product> topProducts = allProducts.subList(0,Math.min(length,allProducts.size()));
+     return topProducts;
+    }*/
 
     @Override
     public Product insertProductIntoDatabase(Product product) {

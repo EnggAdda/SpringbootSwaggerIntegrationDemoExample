@@ -5,6 +5,9 @@ import com.example.swaggerdemoexample.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +34,18 @@ public class ProductController {
             responseCode = "200",
             description = "HTTP status 200 OK"
     )
-    @GetMapping("/all")
-    public List<Product> getAllProductsController() {
-        return  productService.getAllProducts();
+    @GetMapping("/findAll")
+    public List<Product> getAll() {
+        return  productService.findAll();
     }
-
+//@RequestParam
+  /*  @GetMapping("/findAllProducts")
+    public List<Product> getAllProducts(@RequestParam (value = "length" ) Integer length) {
+       if(length == null){
+           length =1;
+       }
+       return productService.findAllProducts(length);
+    }*/
 
     @PostMapping("/insert")
     public Product insertProductInDb(@RequestBody Product product) {
